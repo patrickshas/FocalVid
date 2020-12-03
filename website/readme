@@ -1,0 +1,5 @@
+1. Download all the files to your computer.
+2. Make sure all the files are located in the same folder.
+3. Simply run/open "CountDown.html" using Firefox.
+4. In firefox permissions (usually left side of the address line) make sure that you allow media files to run (this is needed since the files are being executed locally).
+5. Refresh the page after updating permissions if needed.

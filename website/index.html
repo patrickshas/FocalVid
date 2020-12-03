@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+  <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
+  <script language="javascript" src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+<center>
+  <h1>Please click anyplace on the image below for the experiment to begin</h1>
+  <img onclick="myFunction(event)" id="scream" width="960" height="540" src="Screenshot.png" alt="The Scream">
+
+<h2>HRI Experiment // BubbleVid</h2>
+<!--<p>In 10 seconds the video experiment will begin. Please get ready.</p>
+
+<p id="timer">____</p>
+
+<button onclick="myFunction()">Begin Experiment</button>-->
+
+
+
+<script>
+
+/*window.onload = function () {
+  var img = new Image();
+  img.src = "Screenshot.png";
+  img.onload = function () {
+  var canvas = document.getElementById('filler');
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(img,640,320);
+}}*/
+
+var timeleft = 10;
+
+var startTime = 0;
+var currentTime = 0;
+
+function convertSeconds(s) {
+  var min = floor(s / 60);
+  var sec = s % 60;
+  return nf(min, 2) + ':' + nf(sec, 2);
+}
+
+var ding;
+
+function preload() {
+  //ding = loadSound('ding.mp3');
+}
+
+function setup() {
+  noCanvas();
+  startTime = millis();
+
+
+
+  var timer = select('#timer');
+  timer.html(convertSeconds(timeleft - currentTime));
+
+  var interval = setInterval(timeIt, 1000);
+
+  function timeIt() {
+    currentTime = floor((millis() - startTime) / 1000);
+    timer.html(convertSeconds(timeleft - currentTime));
+    if (currentTime == timeleft) {
+      myFunction();
+      clearInterval(interval);
+      //counter = 0;
+    }
+  }
+}
+
+function myFunction() {
+  location.replace("BubbleVid.html")
+}
+</script>
+</center>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<head>
+    <title> Draw the Portal </title>
+    	<style>
+		#effects {
+			pointer-events : none;
+		}
+		#camera {
+			pointer-events : auto;
+		}
+		#filler {
+			pointer-events : none;
+		}
+		canvas {
+			position    : relative;
+			margin-left : 0px;
+			border      : solid 2px;
+			cursor: none;
+		}
+    	</style>
+    <script>
+
+	window.onload = function () {
+
+		function uuidv4() {
+  			return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    			(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  			);
+		}
+		const SessionID = uuidv4();
+		console.log(SessionID);
+
+    // GET THE IMAGE.
+    var img = new Image();
+    img.src = "black.png";
+
+    //var img01 = new Image();
+    //img01.src = "https://mdn.mozillademos.org/files/5397/rhino.jpg";
+
+
+    // WAIT TILL IMAGE IS LOADED.
+    img.onload = function () {
+
+    // BOTTOM CANVAS.
+    var canvas = document.getElementById('camera');
+    var ctx = canvas.getContext('2d');
+
+    img.width = canvas.width;
+    img.height = canvas.height;
+
+    //ctx.drawImage(img01, 0, 0,400,400);       // Bottom Image
+
+    var video = document.createElement("video");
+    video.src = "f11.mp4";
+    video.addEventListener('loadeddata', function() {
+
+    video.play();  // start playing
+    update(); //Start rendering
+    });
+
+    function update(){
+
+    ctx.drawImage(video, 0, 0, 960, 540);
+		requestAnimationFrame(update); // wait for the browser to be ready to present another animation frame.
+    }
+
+
+
+    // TOP CANVAS.
+    var canvas01 = document.getElementById('effects');
+    var ctx01 = canvas01.getContext('2d');
+    ctx01.globalAlpha = 0.9;
+
+    img.width = canvas.width;
+    img.height = canvas.height;
+    //ctx01.clearRect(0, 0, canvas01.width, canvas01.height);
+    ctx01.drawImage(img, 0, 0, 960,540);       // Top image
+
+
+    //setInterval (console.log (x, " ", y), 5);
+  	/*  var clearCircle = function(x, y, radius)
+    {
+    ctx01.beginPath();
+    ctx01.arc(x, y, radius, 0, 2 * Math.PI, false);
+    ctx01.clip();
+	   ctx01.clearRect(x - radius - 1, y - radius - 1, radius * 2 + 2, radius * 2 + 2);
+
+   	}*/
+
+   	var d = new Date();
+   	var n0 = d.getTime();
+   	//console.log (n0);
+   	var lastExecution;
+   	canvas.addEventListener('mousemove', function (e) {
+     ctx01.clearRect(0, 0, canvas01.width, canvas01.height);
+     ctx01.drawImage(img, 0, 0, 960,540);       // Top image
+	 var d0 = new Date();
+	 var n1 = d0.getTime();
+	 console.log (" x ", e.x - canvas.offsetLeft, " y ", e.y - canvas.offsetTop, " t ", n1-n0, SessionID);
+   	var l_t = {
+     'x' : e.x - canvas.offsetLeft,
+     'y' : e.y - canvas.offsetTop,
+	 't' : n1-n0,
+	 'ID' : SessionID };
+
+
+    //console.log (l_t);
+	  var x=  e.x - canvas.offsetLeft;
+	  var y=  e.y - canvas.offsetTop+0;
+    /*var x0 = x;
+    var y0 = y;
+
+    if (x == null){
+      x=x0;
+    }
+    if (y == null){
+      y=y0;
+    }*/
+	  //var rect = canvas.getBoundingClientRect();
+
+	  radius02 = 15;
+	radius01 = 45;
+	  radius03 = 75;
+	  radius04 = 105;
+	  radius05 = 135;
+	//clearCircle(x0, y0, 50);
+
+	ctx01.save();
+
+	ctx01.beginPath();
+  ctx01.arc(x, y, radius05, 0, 2 * Math.PI, false);
+  ctx01.clip();
+	ctx01.clearRect(x - radius05 - 1, y - radius05 - 1, radius05 * 2 + 2, radius05 * 2 + 2);
+  ctx01.globalAlpha = 0.7;
+  ctx01.drawImage(img, 0, 0,960,540);
+
+	ctx01.beginPath();
+  ctx01.arc(x, y, radius04, 0, 2 * Math.PI, false);
+  ctx01.clip();
+	ctx01.clearRect(x - radius04 - 1, y - radius04 - 1, radius04 * 2 + 2, radius04 * 2 + 2);
+  ctx01.globalAlpha = 0.6;
+  ctx01.drawImage(img, 0, 0,960,540);
+
+	ctx01.beginPath();
+  ctx01.arc(x, y, radius03, 0, 2 * Math.PI, false);
+  ctx01.clip();
+	ctx01.clearRect(x - radius03 - 1, y - radius03 - 1, radius03 * 2 + 2, radius03 * 2 + 2);
+  ctx01.globalAlpha = 0.5;
+  ctx01.drawImage(img, 0, 0,960,540);
+  
+  ctx01.beginPath();
+  ctx01.arc(x, y, radius01, 0, 2 * Math.PI, false);
+  ctx01.clip();
+	ctx01.clearRect(x - radius01 - 1, y - radius01 - 1, radius01 * 2 + 2, radius01 * 2 + 2);
+  ctx01.globalAlpha = 0.4;
+  ctx01.drawImage(img, 0, 0,960,540);
+  //console.log('here');
+  ctx01.beginPath();
+  ctx01.arc(x, y, radius02, 0, 2 * Math.PI, false);
+  ctx01.clip();
+	ctx01.clearRect(x - radius02 - 1, y - radius02 - 1, radius02 * 2 + 2, radius02 * 2 + 2);
+ 
+  //console.log('here');
+	ctx01.restore();
+
+	  var now = Date.now();
+    if (now - lastExecution < 10) return; // ~60Hz
+	lastExecution = now;
+	
+
+    const options = {
+      method: 'POST',
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify(l_t)
+    };
+
+	fetch('/api', options);
+	
+
+	video.addEventListener('ended',myFunction,false);
+	function myFunction() {
+      location.replace("thankyou.html")
+    }
+
+
+
+	//ctx01.clearRect(0, 0, canvas01.width, canvas01.height);
+	//ctx01.globalAlpha = 0.2;
+	//ctx01.drawImage(img, 0, 0,960,540);
+	//ctx01.globalAlpha = 0.2;
+});
+
+
+//clearCircle(50, 50, 50);
+
+
+
+
+
+//setInterval (clearCircle(x, y, 50), 10);
+//requestAnimationFrame(clearCircle(50, 50, 50));
+
+}
+}
+
+
+		/*function main() {
+			CAMERA_CANVAS         = document.getElementById('camera');
+            CAMERA_CANVAS.width   = SIZE;
+            CAMERA_CANVAS.height  = SIZE;
+			EFFECTS_CANVAS        = document.getElementById('effects');
+            EFFECTS_CANVAS.width  = SIZE;
+            EFFECTS_CANVAS.height = SIZE;
+
+			var constraints = { video: true };
+			var permission 	= navigator.mediaDevices.getUserMedia(constraints);
+			permission.then(
+				function(stream) {
+					var video 		= document.createElement('video');
+					video.srcObject = stream;
+					video.play();
+					setInterval(updateImage, INTERVAL, video);
+				}
+			).catch(
+				function(err) {
+					alert("camera error");
+				}
+			);
+
+			CAMERA_CANVAS.addEventListener('mousedown', updateColor);
+        }
+
+		function updateImage(video) {
+            const context = CAMERA_CANVAS.getContext('2d');
+
+			const minSize = Math.min(video.videoWidth,
+								   video.videoHeight);
+			const startX  = (video.videoWidth  - minSize) / 2;
+			const startY  = (video.videoHeight - minSize) / 2;
+
+			context.drawImage(video, startX, startY, minSize, minSize,
+									 0, 0, SIZE, SIZE);
+
+			clearEffectsCanvas();
+			if (GAME_OVER == false) {
+				const pixelLocations = getPointerPixels();
+				// showLocations(pixelLocations);
+				if (pixelLocations.length > 0) {
+					const centrePoint = average(pixelLocations);
+					centrePoint.time  = new Date().getTime();
+					PATH.push(centrePoint);
+				}
+				keepRecentPartOfPath();
+				SCORE = calculateRoundness();
+				if (SCORE >= SCORE_THRESHOLD) {
+					GAME_OVER=true;
+				}
+			} else {
+				fillPortal("black");
+				showScore(SCORE, average(PATH));
+			}
+			// drawPath();
+			updateParticles(EFFECTS_CANVAS);
+		}
+
+		function getPointerPixels(){
+			const context   = CAMERA_CANVAS.getContext("2d");
+			const imageData = context.getImageData(0, 0, SIZE, SIZE);
+			const oneDArray = imageData.data;
+
+			var pixelLocations = [];
+			for (var y = 0; y < SIZE; y++) {
+				for (var x = 0; x < SIZE; x++) {
+					const r = oneDArray[ y*SIZE*4 + x*4 + 0 ];
+					const g = oneDArray[ y*SIZE*4 + x*4 + 1 ];
+					const b = oneDArray[ y*SIZE*4 + x*4 + 2 ];
+					if (distance(COLOR, [r,g,b]) < THRESHOLD) {
+						pixelLocations.push([x, y]);
+					}
+				}
+			}
+			return pixelLocations;
+		}
+
+		function showLocations(locations) {
+			const context = EFFECTS_CANVAS.getContext("2d");
+			for (var i = 0; i < locations.length; i++) {
+				context.fillStyle = "black";
+				context.fillRect(...locations[i], 1, 1);
+			}
+			context.fill();
+		}
+
+		function clearEffectsCanvas() {
+			const context = EFFECTS_CANVAS.getContext("2d");
+			context.clearRect(0, 0, SIZE, SIZE);
+		}
+
+
+		function getCursorPosition(event) {
+			const rect = CAMERA_CANVAS.getBoundingClientRect();
+			const x    = (event.clientX - rect.left);
+			const y    = (event.clientY - rect.top);
+			return [x,y];
+		} */
+
+
+
+    </script>
+</head>
+<body>
+	<center>
+		<div class=div1>
+			<h1>BubbleVid Canvas</h1>
+			<canvas id="camera" width="960" height="540"style="position: absolute; z-index: 0; background-color: transparent;"></canvas>
+			<canvas id="effects"width="960" height="540"style="position: relative; z-index: 1; background-color: transparent;"></canvas>
+			<div style="display:none;">
+				<img id="source"
+					 src="https://mdn.mozillademos.org/files/5397/rhino.jpg"
+					 width="300" height="227">
+			</div>
+		</div>
+		<div class=div2>
+			<h1>Results Canvas</h1>
+			<canvas id="filler" width="320" height="180"style="position: relative; z-index: 0; background-color: transparent;"></canvas>
+		</div>
+
+	</center>
+</body>
+</html>
