@@ -4,7 +4,7 @@ This repository contains the FocalVid source code.
 
 If you use any of this data, please consider citing:
 
-
+```
 @InProceedings{Shaghaghi2020FocalVid,
     author = {Shaghaghi, Sahand and Tripp, Bryan and Nehaniv, Chrystopher and Aroyo, Alexander Mois and Dautenhahn, Kerstin},
     title = {FocalVid:Facilitating Remote Studies of Video Saliency},
@@ -14,4 +14,4 @@ If you use any of this data, please consider citing:
     publisher = {IARIA},
     pages = {471-477},
 }
-
+```
