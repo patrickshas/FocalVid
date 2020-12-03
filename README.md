@@ -15,3 +15,6 @@ If you use any of this data, please consider citing:
     pages = {471-477},
 }
 ```
+
+In order to succcesfully run this code you will need to intall the needed npm dependencies.
+The content in the Website folder could be run as standalone HTML.
