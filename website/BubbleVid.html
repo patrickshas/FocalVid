@@ -87,25 +87,25 @@
 
    	}*/
 
-   	var d = new Date();
-   	var n0 = d.getTime();
-   	//console.log (n0);
-   	var lastExecution;
-   	canvas.addEventListener('mousemove', function (e) {
+     var d = new Date();
+     var n0 = d.getTime();
+     //console.log (n0);
+     var lastExecution;
+     canvas.addEventListener('mousemove', function (e) {
      ctx01.clearRect(0, 0, canvas01.width, canvas01.height);
      ctx01.drawImage(img, 0, 0, 960,540);       // Top image
-	 var d0 = new Date();
-	 var n1 = d0.getTime();
-	 console.log (" x ", e.x - canvas.offsetLeft, " y ", e.y - canvas.offsetTop, " t ", n1-n0, SessionID);
-   	var l_t = {
+     var d0 = new Date();
+     var n1 = d0.getTime();
+     console.log (" x ", e.x - canvas.offsetLeft, " y ", e.y - canvas.offsetTop, " t ", n1-n0, SessionID);
+     var l_t = {
      'x' : e.x - canvas.offsetLeft,
      'y' : e.y - canvas.offsetTop,
-	 't' : n1-n0,
-	 'ID' : SessionID };
+     't' : n1-n0,
+     'ID' : SessionID };
 
 
-    //console.log (l_t);
-	  var x=  e.x - canvas.offsetLeft;
+      //console.log (l_t);
+      var x=  e.x - canvas.offsetLeft;
 	  var y=  e.y - canvas.offsetTop+0;
     /*var x0 = x;
     var y0 = y;
